@@ -21,5 +21,6 @@ import org.springframework.context.annotation.Import
     XPermittedCrossDomainPoliciesFilter::class,
     XPoweredByFilter::class,
     XXssProtectionFilter::class,
+    ContentSecurityPolicyFilter::class,
 )
 class HelmetReactiveAutoConfiguration

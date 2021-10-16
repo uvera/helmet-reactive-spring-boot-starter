@@ -25,6 +25,7 @@ class HelmetReactiveProperties {
     var enableXPermittedCrossDomainPolicies: Boolean = true
     var removeXPoweredBy: Boolean = true
     var disableXXssProtection: Boolean = true
+    var enableContentSecurityPolicy: Boolean = true
 
 
     var crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN
@@ -41,6 +42,10 @@ class HelmetReactiveProperties {
     var xDnsPrefetchControl: XDnsPrefetchControl = XDnsPrefetchControl.OFF
     var xFrameOptions: XFrameOptions = XFrameOptions.SAME_ORIGIN
     var xPermittedCrossDomainPolicies: XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.NONE
+
+    var contentSecurityPolicyDirectives: Map<String, List<String>> = mapOf()
+    var contentSecurityPolicyUseDefault: Boolean = true
+    var contentSecurityPolicyReportOnly: Boolean = false
 }
 
 enum class CrossOriginOpenerPolicy(val value: String) {
