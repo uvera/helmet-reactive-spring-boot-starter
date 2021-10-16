@@ -1,0 +1,7 @@
+package io.uvera.helmetreactivespringbootstarter
+
+import io.uvera.helmetreactivespringbootstarter.configuration.HelmetReactiveConfiguration
+import org.springframework.context.annotation.Import
+
+@Import(HelmetReactiveConfiguration::class)
+annotation class EnableHelmetReactive
