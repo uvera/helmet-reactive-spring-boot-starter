@@ -32,6 +32,7 @@ spring-helmet:
     enable-x-permitted-cross-domain-policies: true
     remove-x-powered-by: true
     disable-x-xss-protection: true
+    enable-content-security-policy: true
 ```
 
 ## How it works
@@ -52,4 +53,8 @@ spring-helmet:
     x-dns-prefetch-control: OFF
     x-frame-options: same_origin
     x-permitted-cross-domain-policies: none
+    content-security-policy-use-default: true
+    content-security-policy-report-only: false
+    # key value pairs where key: String, value: List<String>
+    content-security-policy-directives: 
 ```
