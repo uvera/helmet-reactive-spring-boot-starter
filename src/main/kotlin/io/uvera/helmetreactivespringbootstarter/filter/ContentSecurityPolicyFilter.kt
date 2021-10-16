@@ -18,33 +18,45 @@ import reactor.core.publisher.Mono
 class ContentSecurityPolicyFilter(private val props: HelmetReactiveProperties) : WebFilter {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
+    val headerName by lazy {
+        parseHeaderName(props)
+    }
+
+    val parsedProps by lazy {
+        parseProps(props)
+    }
+
+
     override fun filter(exchange: ServerWebExchange, chain: WebFilterChain): Mono<Void> =
         with(exchange.response.headers) {
-            parseProps(props).doOnNext {
-                set(parseHeaderName(props), it)
+            return parsedProps.doOnNext {
+                set(headerName, it)
             }.doOnError {
                 logger.warn("Error occurred: " + it.localizedMessage)
+            }.flatMap {
+                chain.filter(exchange)
             }
-            return chain.filter(exchange)
         }
 
     private fun parseProps(props: HelmetReactiveProperties): Mono<String> {
         val directives =
             if (props.contentSecurityPolicyUseDefault) ContentSecurityPolicyValues.defaultValues.toMutableMap() else mutableMapOf()
-        props.contentSecurityPolicyDirectives.forEach { (key, value) ->
-            directives[key] = value
-        }
+        props.contentSecurityPolicyDirectives
+            .forEach { (key, value) ->
+                val newKey = key.dashify()
+                directives[newKey] = value
+            }
 
         if (directives.isEmpty()) return Mono.error(ReactiveHelmetException("Directives provided are empty."))
 
         val result = directives
             .mapKeys { it.key.dashify() }
-            .mapTo(mutableListOf()) { (entry, value) ->
-                val directiveValue = value.joinToString(separator = "", prefix = " ")
-                if (directiveValue.isEmpty()) {
+            .map { (entry, value) ->
+                val directiveValue = value.joinToString(separator = " ")
+                if (directiveValue.isBlank()) {
                     entry
                 } else {
-                    "${entry}${directives}"
+                    "$entry $directiveValue"
                 }
             }
         return Mono.just(result.joinToString(separator = ";"))
@@ -54,7 +66,7 @@ class ContentSecurityPolicyFilter(private val props: HelmetReactiveProperties) :
         if (props.contentSecurityPolicyReportOnly) "Content-Security-Policy-Report-Only"
         else "Content-Security-Policy"
 
-    val dashifyRegex: Regex = "/[A-Z]/g".toRegex()
+    val dashifyRegex: Regex = "[A-Z]".toRegex()
 
     private fun String.dashify() = this.replace(dashifyRegex) {
         "-${it.value.lowercase()}"
