@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-parent")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    annotationProcessor("org.springframework.boot:spring-boot-autoconfigure-processor")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -37,4 +37,44 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.bootJar {
+    enabled = false
+}
+
+tasks.jar {
+    enabled = true
+    archiveClassifier.set("")
+}
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").allSource)
+}
+
+val myArtifactId: String = rootProject.name
+
+val myArtifactGroup: String = project.group.toString()
+
+val myArtifactVersion: String = project.version.toString()
+
+publishing {
+    publications {
+
+        create<MavenPublication>("mavenJava") {
+            groupId = myArtifactGroup
+            artifactId = myArtifactId
+            version = myArtifactVersion
+
+            from(components["java"])
+            artifact(sourcesJar) {
+                classifier = "sources"
+            }
+            pom {
+                packaging = "jar"
+                name.set(myArtifactId)
+            }
+        }
+    }
 }
