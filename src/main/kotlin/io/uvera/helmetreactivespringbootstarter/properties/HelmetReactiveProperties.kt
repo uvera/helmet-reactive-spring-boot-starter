@@ -3,36 +3,36 @@
 package io.uvera.helmetreactivespringbootstarter.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.ConstructorBinding
+import org.springframework.stereotype.Component
 
+@Component
 @ConfigurationProperties(prefix = "spring.helmet.reactive")
-@ConstructorBinding
-class HelmetReactiveProperties(
-    val enableCrossOriginEmbedderPolicy: Boolean = true,
-    val enableCrossOriginOpenerPolicy: Boolean = true,
-    val enableCrossOriginResourcePolicy: Boolean = true,
-    val enableOriginAgentCluster: Boolean = true,
-    val enableReferrerPolicy: Boolean = true,
-    val enableStrictTransportSecurity: Boolean = true,
-    val enableDoNotSniffMimetype: Boolean = true,
-    val enableXDnsPrefetchControl: Boolean = true,
-    val enableXDownloadOptions: Boolean = true,
-    val enableXFrameOptions: Boolean = true,
-    val enableXPermittedCrossDomainPolicies: Boolean = true,
-    val removeXPoweredBy: Boolean = true,
-    val disableXXssProtection: Boolean = true,
+class HelmetReactiveProperties {
+    var enableCrossOriginEmbedderPolicy: Boolean = true
+    var enableCrossOriginOpenerPolicy: Boolean = true
+    var enableCrossOriginResourcePolicy: Boolean = true
+    var enableOriginAgentCluster: Boolean = true
+    var enableReferrerPolicy: Boolean = true
+    var enableStrictTransportSecurity: Boolean = true
+    var enableDoNotSniffMimetype: Boolean = true
+    var enableXDnsPrefetchControl: Boolean = true
+    var enableXDownloadOptions: Boolean = true
+    var enableXFrameOptions: Boolean = true
+    var enableXPermittedCrossDomainPolicies: Boolean = true
+    var removeXPoweredBy: Boolean = true
+    var disableXXssProtection: Boolean = true
 
 
-    val crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN,
-    val crossOriginOpenerPolicy: CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.SAME_ORIGIN,
-    val referrerPolicy: List<ReferrerPolicy> = listOf(),
-    val strictTransportSecurityMaxAge: Long = 15552000L,
-    val strictTransportSecurityIncludeSubDomains: Boolean = true,
-    val strictTransportSecurityPreload: Boolean = false,
-    val xDnsPrefetchControl: XDnsPrefetchControl = XDnsPrefetchControl.OFF,
-    val xFrameOptions: XFrameOptions = XFrameOptions.SAME_ORIGIN,
-    val xPermittedCrossDomainPolicies: XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.NONE,
-)
+    var crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN
+    var crossOriginOpenerPolicy: CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.SAME_ORIGIN
+    var referrerPolicy: List<ReferrerPolicy> = listOf()
+    var strictTransportSecurityMaxAge: Long = 15552000L
+    var strictTransportSecurityIncludeSubDomains: Boolean = true
+    var strictTransportSecurityPreload: Boolean = false
+    var xDnsPrefetchControl: XDnsPrefetchControl = XDnsPrefetchControl.OFF
+    var xFrameOptions: XFrameOptions = XFrameOptions.SAME_ORIGIN
+    var xPermittedCrossDomainPolicies: XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.NONE
+}
 
 enum class CrossOriginOpenerPolicy(val value: String) {
     SAME_ORIGIN("same-origin"),
