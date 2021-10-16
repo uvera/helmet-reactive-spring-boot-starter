@@ -9,7 +9,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-x-frame-options"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-x-frame-options"])
 @Order(1)
 @Component
 class XFrameOptionsFilter(private val props: HelmetReactiveProperties) : WebFilter {

@@ -11,7 +11,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-x-dns-prefetch-control"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-x-dns-prefetch-control"])
 @Order(1)
 @Component
 class XDnsPrefetchControlFilter(private val props: HelmetReactiveProperties) : WebFilter {

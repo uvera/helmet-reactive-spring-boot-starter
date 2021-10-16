@@ -8,7 +8,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-origin-agent-cluster"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-origin-agent-cluster"])
 @Order(1)
 @Component
 class OriginAgentClusterFilter : WebFilter {

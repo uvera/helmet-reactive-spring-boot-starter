@@ -11,7 +11,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-referrer-policy"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-referrer-policy"])
 @Order(1)
 @Component
 class ReferrerPolicyFilter(private val props: HelmetReactiveProperties) : WebFilter {

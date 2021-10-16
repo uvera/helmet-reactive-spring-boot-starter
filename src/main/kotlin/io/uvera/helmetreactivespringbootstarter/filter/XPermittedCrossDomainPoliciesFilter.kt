@@ -9,7 +9,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-x-permitted-cross-domain-policies"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-x-permitted-cross-domain-policies"])
 @Order(1)
 @Component
 class XPermittedCrossDomainPoliciesFilter(private val props: HelmetReactiveProperties) : WebFilter {

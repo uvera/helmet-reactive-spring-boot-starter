@@ -8,7 +8,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["remove-x-powered-by"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["remove-x-powered-by"])
 @Order(1)
 @Component
 class XPoweredByFilter : WebFilter {

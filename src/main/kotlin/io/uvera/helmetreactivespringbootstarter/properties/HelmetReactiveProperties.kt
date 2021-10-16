@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 
 @Component
-@ConfigurationProperties(prefix = "spring.helmet.reactive")
+@ConfigurationProperties(prefix = "spring-helmet.reactive")
 class HelmetReactiveProperties {
     var enableCrossOriginEmbedderPolicy: Boolean = true
     var enableCrossOriginOpenerPolicy: Boolean = true

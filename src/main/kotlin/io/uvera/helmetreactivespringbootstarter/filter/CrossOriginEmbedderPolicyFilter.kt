@@ -8,7 +8,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-cross-origin-embedder-policy"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-cross-origin-embedder-policy"])
 @Order(1)
 @Component
 class CrossOriginEmbedderPolicyFilter : WebFilter {

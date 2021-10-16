@@ -9,7 +9,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-@ConditionalOnProperty(prefix = "spring.helmet.reactive", name = ["enable-cross-origin-opener-policy"])
+@ConditionalOnProperty(prefix = "spring-helmet.reactive", name = ["enable-cross-origin-opener-policy"])
 @Order(1)
 @Component
 class CrossOriginOpenerPolicyFilter(private val props: HelmetReactiveProperties) : WebFilter {
