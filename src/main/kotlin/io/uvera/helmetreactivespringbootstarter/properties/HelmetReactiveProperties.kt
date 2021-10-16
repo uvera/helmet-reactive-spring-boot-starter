@@ -4,10 +4,12 @@ package io.uvera.helmetreactivespringbootstarter.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
+import org.springframework.validation.annotation.Validated
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotEmpty
 
 @Component
+@Validated
 @ConfigurationProperties(prefix = "spring-helmet.reactive")
 class HelmetReactiveProperties {
     var enableCrossOriginEmbedderPolicy: Boolean = true
@@ -28,12 +30,10 @@ class HelmetReactiveProperties {
     var crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN
     var crossOriginOpenerPolicy: CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.SAME_ORIGIN
 
-    @set:NotEmpty
-    @field:NotEmpty
+    @NotEmpty
     var referrerPolicy: List<ReferrerPolicy> = listOf(ReferrerPolicy.NO_REFERRER)
 
-    @set:Min(1)
-    @field:Min(1)
+    @Min(1)
     var strictTransportSecurityMaxAge: Long = 15552000L
 
     var strictTransportSecurityIncludeSubDomains: Boolean = true
