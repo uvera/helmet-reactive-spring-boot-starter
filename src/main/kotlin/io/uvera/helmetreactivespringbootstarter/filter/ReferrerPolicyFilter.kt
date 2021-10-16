@@ -1,6 +1,5 @@
 package io.uvera.helmetreactivespringbootstarter.filter
 
-import io.uvera.helmetreactivespringbootstarter.exception.HelmetException
 import io.uvera.helmetreactivespringbootstarter.properties.HelmetReactiveProperties
 import io.uvera.helmetreactivespringbootstarter.properties.ReferrerPolicy
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -26,13 +25,7 @@ class ReferrerPolicyFilter(private val props: HelmetReactiveProperties) : WebFil
         }
 
     private fun parseHeaderValues(referrerPolicy: List<ReferrerPolicy>): Mono<String> {
-        val value = referrerPolicy.map { it.value }
-            .takeIf { it.isNotEmpty() }
-            ?.joinToString(separator = ",")
-
-        return if (value == null)
-            Mono.error(HelmetException("Referrer policy property list cannot be empty"))
-        else
-            Mono.just(value)
+        val value = referrerPolicy.joinToString(separator = ",") { it.value }
+        return Mono.just(value)
     }
 }

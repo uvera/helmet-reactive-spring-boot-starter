@@ -4,6 +4,8 @@ package io.uvera.helmetreactivespringbootstarter.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotEmpty
 
 @Component
 @ConfigurationProperties(prefix = "spring-helmet.reactive")
@@ -25,8 +27,13 @@ class HelmetReactiveProperties {
 
     var crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN
     var crossOriginOpenerPolicy: CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.SAME_ORIGIN
+
+    @field:NotEmpty
     var referrerPolicy: List<ReferrerPolicy> = listOf(ReferrerPolicy.NO_REFERRER)
+
+    @field:Min(1)
     var strictTransportSecurityMaxAge: Long = 15552000L
+
     var strictTransportSecurityIncludeSubDomains: Boolean = true
     var strictTransportSecurityPreload: Boolean = false
     var xDnsPrefetchControl: XDnsPrefetchControl = XDnsPrefetchControl.OFF

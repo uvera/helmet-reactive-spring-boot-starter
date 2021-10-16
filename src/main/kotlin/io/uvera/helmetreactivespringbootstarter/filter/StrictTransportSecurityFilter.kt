@@ -1,6 +1,5 @@
 package io.uvera.helmetreactivespringbootstarter.filter
 
-import io.uvera.helmetreactivespringbootstarter.exception.HelmetException
 import io.uvera.helmetreactivespringbootstarter.properties.HelmetReactiveProperties
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.core.annotation.Order
@@ -24,12 +23,9 @@ class StrictTransportSecurityFilter(private val props: HelmetReactiveProperties)
         }
 
     private fun parseHeaderValues(props: HelmetReactiveProperties): Mono<String> {
-        val result = mutableListOf<String>()
-        if (props.strictTransportSecurityMaxAge > 0L) {
-            result.add("max-age=${props.strictTransportSecurityMaxAge}")
-        } else {
-            return Mono.error(HelmetException("Strict transport security max age must be greater than 0"))
-        }
+        val result = mutableListOf(
+            "max-age=${props.strictTransportSecurityMaxAge}"
+        )
 
         if (props.strictTransportSecurityIncludeSubDomains) {
             result.add("includeSubDomains")
