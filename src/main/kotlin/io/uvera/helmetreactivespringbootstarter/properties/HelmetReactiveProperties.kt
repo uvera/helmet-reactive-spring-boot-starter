@@ -28,9 +28,11 @@ class HelmetReactiveProperties {
     var crossOriginResourcePolicy: CrossOriginResourcePolicy = CrossOriginResourcePolicy.SAME_ORIGIN
     var crossOriginOpenerPolicy: CrossOriginOpenerPolicy = CrossOriginOpenerPolicy.SAME_ORIGIN
 
+    @set:NotEmpty
     @field:NotEmpty
     var referrerPolicy: List<ReferrerPolicy> = listOf(ReferrerPolicy.NO_REFERRER)
 
+    @set:Min(1)
     @field:Min(1)
     var strictTransportSecurityMaxAge: Long = 15552000L
 
