@@ -1,4 +1,5 @@
 # Helmet
+
 [![](https://jitpack.io/v/uvera/helmet-reactive-spring-boot-starter.svg)](https://jitpack.io/#uvera/helmet-reactive-spring-boot-starter)
 
 Helmet secures your spring webflux apps by setting various HTTP headers.
@@ -7,10 +8,11 @@ This is a 1:1 copy of [ Helmet.js ]( https://raw.githubusercontent.com/helmetjs/
 
 ## Quick start
 
-Add `https://jitpack.to` to your build tool maven repositories More info
-at [ reactive helmet jitpack io repository ](https://jitpack.io/#uvera/helmet-reactive-spring-boot-starter)
+Add `https://jitpack.to` to your build tool maven repositories.
 
-Add `com.github.uvera:helmet-reactive-spring-boot-starter` to your dependencies
+More info at [ reactive helmet jitpack io repository ](https://jitpack.io/#uvera/helmet-reactive-spring-boot-starter)
+
+Add `com.github.uvera:helmet-reactive-spring-boot-starter` to your dependencies.
 
 Enable following configuration properties
 
