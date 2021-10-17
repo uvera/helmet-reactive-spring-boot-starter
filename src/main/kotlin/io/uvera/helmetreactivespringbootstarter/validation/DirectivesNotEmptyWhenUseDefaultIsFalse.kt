@@ -20,7 +20,7 @@ class DirectivesNotEmptyWhenUseDefaultIsFalseValidator :
     ConstraintValidator<DirectivesNotEmptyWhenUseDefaultIsFalse, HelmetReactiveProperties> {
     override fun isValid(value: HelmetReactiveProperties?, context: ConstraintValidatorContext?): Boolean {
         if (value == null) return true
-        if (!value.contentSecurityPolicyUseDefault && value.contentSecurityPolicyDirectives.isEmpty()) {
+        if (!value.contentSecurityPolicy.useDefault && value.contentSecurityPolicy.directives.isEmpty()) {
             return false
         }
         return true

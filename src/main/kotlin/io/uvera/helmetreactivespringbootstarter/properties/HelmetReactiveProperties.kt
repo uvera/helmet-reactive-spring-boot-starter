@@ -48,12 +48,17 @@ class HelmetReactiveProperties {
     var xFrameOptions: XFrameOptions = XFrameOptions.SAME_ORIGIN
     var xPermittedCrossDomainPolicies: XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.NONE
 
-    @get:DirectiveValuesValid
-    @get:DirectiveNameValid
-    @get:DefaultSrcDirectiveValid
-    var contentSecurityPolicyDirectives: CSPDirectives = mapOf()
-    var contentSecurityPolicyUseDefault: Boolean = true
-    var contentSecurityPolicyReportOnly: Boolean = false
+    var contentSecurityPolicy: ContentSecurityPolicyProperties = ContentSecurityPolicyProperties()
+
+    @Validated
+    class ContentSecurityPolicyProperties {
+        @get:DirectiveValuesValid
+        @get:DirectiveNameValid
+        @get:DefaultSrcDirectiveValid
+        var directives: CSPDirectives = mapOf()
+        var useDefault: Boolean = true
+        var reportOnly: Boolean = false
+    }
 }
 
 typealias CSPDirectives = Map<String, List<String>>

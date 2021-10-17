@@ -1,7 +1,6 @@
 package io.uvera.helmetreactivespringbootstarter.filter
 
 import io.uvera.helmetreactivespringbootstarter.configuration.ContentSecurityPolicyValues
-import io.uvera.helmetreactivespringbootstarter.exception.ReactiveHelmetException
 import io.uvera.helmetreactivespringbootstarter.properties.HelmetReactiveProperties
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
@@ -40,8 +39,8 @@ class ContentSecurityPolicyFilter(private val props: HelmetReactiveProperties) :
 
     private fun parseProps(props: HelmetReactiveProperties): Mono<String> {
         val directives =
-            if (props.contentSecurityPolicyUseDefault) ContentSecurityPolicyValues.defaultValues.toMutableMap() else mutableMapOf()
-        props.contentSecurityPolicyDirectives
+            if (props.contentSecurityPolicy.useDefault) ContentSecurityPolicyValues.defaultValues.toMutableMap() else mutableMapOf()
+        props.contentSecurityPolicy.directives
             .forEach { (key, value) ->
                 val newKey = key.dashify()
                 directives[newKey] = value
@@ -61,7 +60,7 @@ class ContentSecurityPolicyFilter(private val props: HelmetReactiveProperties) :
     }
 
     private fun parseHeaderName(props: HelmetReactiveProperties): String =
-        if (props.contentSecurityPolicyReportOnly) "Content-Security-Policy-Report-Only"
+        if (props.contentSecurityPolicy.reportOnly) "Content-Security-Policy-Report-Only"
         else "Content-Security-Policy"
 
     val dashifyRegex: Regex = "[A-Z]".toRegex()
