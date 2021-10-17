@@ -2,6 +2,10 @@
 
 package io.uvera.helmetreactivespringbootstarter.properties
 
+import io.uvera.helmetreactivespringbootstarter.validation.DefaultSrcDirectiveValid
+import io.uvera.helmetreactivespringbootstarter.validation.DirectiveNameValid
+import io.uvera.helmetreactivespringbootstarter.validation.DirectiveValuesValid
+import io.uvera.helmetreactivespringbootstarter.validation.DirectivesNotEmptyWhenUseDefaultIsFalse
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 import org.springframework.validation.annotation.Validated
@@ -11,6 +15,7 @@ import javax.validation.constraints.NotEmpty
 @Component
 @Validated
 @ConfigurationProperties(prefix = "spring-helmet.reactive")
+@DirectivesNotEmptyWhenUseDefaultIsFalse
 class HelmetReactiveProperties {
     var enableCrossOriginEmbedderPolicy: Boolean = true
     var enableCrossOriginOpenerPolicy: Boolean = true
@@ -43,10 +48,15 @@ class HelmetReactiveProperties {
     var xFrameOptions: XFrameOptions = XFrameOptions.SAME_ORIGIN
     var xPermittedCrossDomainPolicies: XPermittedCrossDomainPolicies = XPermittedCrossDomainPolicies.NONE
 
-    var contentSecurityPolicyDirectives: Map<String, List<String>> = mapOf()
+    @get:DirectiveValuesValid
+    @get:DirectiveNameValid
+    @get:DefaultSrcDirectiveValid
+    var contentSecurityPolicyDirectives: CSPDirectives = mapOf()
     var contentSecurityPolicyUseDefault: Boolean = true
     var contentSecurityPolicyReportOnly: Boolean = false
 }
+
+typealias CSPDirectives = Map<String, List<String>>
 
 enum class CrossOriginOpenerPolicy(val value: String) {
     SAME_ORIGIN("same-origin"),
