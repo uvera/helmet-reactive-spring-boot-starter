@@ -47,8 +47,6 @@ class ContentSecurityPolicyFilter(private val props: HelmetReactiveProperties) :
                 directives[newKey] = value
             }
 
-        if (directives.isEmpty()) return Mono.error(ReactiveHelmetException("Directives provided are empty."))
-
         val result = directives
             .mapKeys { it.key.dashify() }
             .map { (entry, value) ->
